@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lineamientos Coffee Break - Ajinomoto Perú</title>
+    <!-- Importamos fuentes modernas y iconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --ajinomoto-red: #E60012;
+            --ajinomoto-dark: #333333;
+            --ajinomoto-gray: #f4f4f4;
+            --text-color: #2c3e50;
+            --white: #ffffff;
+            --transition-speed: 0.6s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e0e0e0;
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Evita scroll en el body, la presentación es el scroll */
+        }
+
+        /* Contenedor Principal de la Presentación */
+        .presentation-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            max-height: 900px;
+            background: var(--white);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .presentation-container {
+                height: 90vh;
+                border-radius: 12px;
+            }
+        }
+
+        /* Header y Barra de Progreso */
+        header {
+            background: var(--ajinomoto-red);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand i {
+            font-size: 1.5rem;
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(0,0,0,0.1);
+            width: 100%;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--white);
+            width: 0%;
+            transition: width var(--transition-speed) ease;
+        }
+
+        /* Área de Diapositivas */
+        .slides-wrapper {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+            pointer-events: none; /* Evita clicks en diapositivas ocultas */
+            overflow-y: auto; /* Permite scroll si el contenido es muy largo en móviles */
+            text-align: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: all;
+            z-index: 2;
+        }
+
+        .slide.prev {
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+
+        /* Tipografía y Elementos de Slide */
+        h1 {
+            color: var(--ajinomoto-red);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            color: var(--ajinomoto-dark);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: var(--ajinomoto-red);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        p, li {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #555;
+            text-align: left;
+        }
+
+        ul {
+            list-style: none;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        li::before {
+            content: '\f00c'; /* FontAwesome check */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--ajinomoto-red);
+            margin-top: 4px;
+        }
+
+        /* Tarjetas y Contenedores de Contenido */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .info-card {
+            background: var(--ajinomoto-gray);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            border-left: 4px solid var(--ajinomoto-red);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            background: #f9f9f9;
+        }
+
+        .info-card strong {
+            display: block;
+            color: var(--ajinomoto-dark);
+            margin-bottom: 5px;
+        }
+
+        /* Estilos para tabla de tiempos */
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .menu-time {
+            font-weight: 700;
+            color: var(--ajinomoto-red);
+            font-size: 1.1rem;
+            min-width: 120px;
+            text-align: center;
+            background: #ffe6e6;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .menu-desc {
+            text-align: left;
+            flex: 1;
+            padding-left: 15px;
+            font-size: 0.95rem;
+        }
+
+        /* Controles de Navegación */
+        .controls {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            background: var(--ajinomoto-red);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(230, 0, 18, 0.2);
+        }
+
+        .btn:hover {
+            background: #c4000f;
+            transform: scale(1.05);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--ajinomoto-dark);
+            box-shadow: 0 4px 6px rgba(51, 51, 51, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: #000;
+        }
+
+        /* Animaciones de entrada para elementos internos */
+        .animate-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .slide.active .animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        /* Imagen decorativa portada */
+        .hero-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Highlight boxes */
+        .highlight-box {
+            background: #fff5f5;
+            border: 1px dashed var(--ajinomoto-red);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 700px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container">
+        <!-- Encabezado -->
+        <header>
+            <div class="brand">
+                <i class="fa-solid fa-utensils"></i>
+                AJINOMOTO PERÚ
+            </div>
+            <div class="slide-counter">
+                <span id="current-slide">1</span> / <span id="total-slides">8</span>
+            </div>
+        </header>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+
+        <!-- Contenedor de Diapositivas -->
+        <div class="slides-wrapper" id="slides-wrapper">
+            
+            <!-- Slide 1: Portada -->
+            <div class="slide active">
+                <img src="https://picsum.photos/seed/ajinomotocoffee/800/400" alt="Coffee Break" class="hero-image animate-in">
+                <h1 class="animate-in delay-1">Lineamientos para el Servicio de Coffee Break</h1>
+                <p class="animate-in delay-2" style="font-size: 1.2rem; font-weight: 500;">Capacitaciones Internas</p>
+                <div class="animate-in delay-3" style="margin-top: 30px;">
+                    <i class="fa-solid fa-hand-sparkles" style="font-size: 3rem; color: var(--ajinomoto-red);"></i>
+                </div>
+            </div>
+
+            <!-- Slide 2: Objetivo y Alcance -->
+            <div class="slide">
+                <h2 class="animate-in"><i class="fa-solid fa-bullseye"></i> Objetivo</h2>
+                <p class="animate-in delay-1">Establecer criterios, condiciones y procedimientos para el uso del servicio de coffee break en capacitaciones, asegurando control y eficiencia.</p>
+                
+                <div style="width: 50px; height: 2px; background: #ddd; margin: 20px auto;"></div>
+
+                <h2 class="animate-in delay-2"><i class="fa-solid fa-ruler-combined"></i> Alcance</h2>
+                <ul class="animate-in delay-3">
+                    <li>Aplica a todas las áreas con capacitaciones internas aprobadas por GDH.</li>
+                    <li><strong>No aplica</strong> para integraciones, celebraciones, aniversarios ni eventos deportivos.</li>
+                </ul>
+            </div>
+
+            <!-- Slide 3: Proveedor Oficial -->
+            <div class="slide">
+                <i class="fa-solid fa-truck-fast" style="font-size: 3rem; color: var(--ajinomoto-red); margin-bottom: 15px;" class="animate-in"></i>
+                <h2 class="animate-in">Proveedor Oficial</h2>
+                
+                <div class="highlight-box animate-in delay-1">
+                    <h3 style="margin:0; font-size: 1.5rem;">[Nombre del Proveedor]</h3>
+                </div>
+
+                <p class="animate-in delay-2">No se gestionarán servicios con otros proveedores sin autorización expresa.</p>
+                
+                <div class="info-card animate-in delay-3" style="margin-top: 20px;">
+                    <strong><i class="fa-solid fa-circle-exclamation"></i> Importante</strong>
+                    El proveedor <strong>no</strong> brindará el servicio sin la aprobación formal enviada por el área de GDH.
+                </div>
+            </div>
+
+            <!-- Slide 4: Procedimiento (Parte 1) -->
+            <div class="slide">
+                <h2 class="animate-in"><i class="fa-solid fa-list-check"></i> Procedimiento: Solicitud</h2>
+                
+                <div class="card-grid animate-in delay-1">
+                    <div class="info-card">
+                        <strong>Paso 1: Solicitud</strong>
+                        <p>Gestionar autorización vía <em>Forms</em> dirigido a GDH.</p>
+                        <small style="color: #666;">Incluir: Responsable, Ponente, Tema, Fecha, Horario, Lugar, Participantes y Justificación.</small>
+                    </div>
+                    <div class="info-card">
+                        <strong>Paso 2: Aprobación GDH</strong>
+                        <p>La Jefa de GDH, <strong>Mayra</strong>, enviará la aprobación formal vía correo electrónico.</p>
+                        <small style="color: var(--ajinomoto-red);">Sin este correo, no se puede pedir el coffee break.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Procedimiento (Parte 2) -->
+            <div class="slide">
+                <h2 class="animate-in"><i class="fa-solid fa-paper-plane"></i> Procedimiento: Ejecución</h2>
+                <p class="animate-in delay-1">Con la aprobación de GDH, contacta al proveedor:</p>
+                
+                <ul class="animate-in delay-2">
+                    <li>Adjuntar correo de aprobación (Obligatorio).</li>
+                    <li>Indicar fecha, hora y lugar exacto.</li>
+                    <li>Cantidad de asistentes confirmados.</li>
+                    <li>Tipo de servicio según duración.</li>
+                </ul>
+
+                <div class="highlight-box animate-in delay-3">
+                    <strong><i class="fa-regular fa-clock"></i> Anticipación:</strong><br>
+                    Considerar el cierre mensual de facturación (días 19 al 22).
+                </div>
+            </div>
+
+            <!-- Slide 6: Menú por Duración -->
+            <div class="slide">
+                <h2 class="animate-in"><i class="fa-solid fa-mug-hot"></i> Menú por Duración</h2>
+                <p class="animate-in delay-1" style="font-size: 0.9rem;">El servicio base incluye siempre: Cereal bar, Frugos y Galleta.</p>
+
+                <div class="animate-in delay-2" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                    
+                    <div class="menu-item">
+                        <div class="menu-time">1h - 1h 30m</div>
+                        <div class="menu-desc">Servicio Base</div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-time">Hasta 2h</div>
+                        <div class="menu-desc">Servicio Base</div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-time">Hasta 4h</div>
+                        <div class="menu-desc">Servicio Base + <em>Adicionales (si GDH autoriza)</em></div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-time">Hasta 6h</div>
+                        <div class="menu-desc">Servicio Base + <em>Adicionales (si GDH autoriza)</em></div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-time">Hasta 8h</div>
+                        <div class="menu-desc">Servicio Base + <em>Adicionales (si GDH autoriza)</em></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Slide 7: Bebidas y Control -->
+            <div class="slide">
+                <div class="card-grid animate-in">
+                    <div class="info-card">
+                        <strong><i class="fa-solid fa-bottle-water"></i> Bebidas</strong>
+                        <p>Priorizar bebidas no personales (dispensadores/vasos).</p>
+                        <p>Evitar desperdicios.</p>
+                    </div>
+                    <div class="info-card">
+                        <strong><i class="fa-solid fa-clipboard-check"></i> Control</strong>
+                        <p>Solicitar con anticipación mínima.</p>
+                        <p>Informar cambios o cancelaciones a tiempo.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;" class="animate-in delay-2">
+                    <h3><i class="fa-solid fa-file-invoice-dollar"></i> Facturación y Pago</h3>
+                    <ul style="margin-top: 10px;">
+                        <li>Única solicitud de pago mensual.</li>
+                        <li><strong>Cierre de facturación:</strong> 19 al 22 de cada mes.</li>
+                        <li>Solo se incluirán servicios aprobados por GDH.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 8: Cierre -->
+            <div class="slide">
+                <div style="font-size: 4rem; color: var(--ajinomoto-red); margin-bottom: 20px;" class="animate-in">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                </div>
+                <h2 class="animate-in delay-1">¡Gracias!</h2>
+                <p class="animate-in delay-2">Recuerda seguir estos lineamientos para una gestión eficiente.</p>
+                
+                <div class="highlight-box animate-in delay-3" style="background: var(--ajinomoto-red); color: white; border: none;">
+                    <strong>Ajinomoto del Perú</strong><br>
+                    Crear valor para la sociedad
+                </div>
+                
+                <button class="btn btn-secondary animate-in delay-4" onclick="goToSlide(0)">
+                    <i class="fa-solid fa-rotate-left"></i> Volver al inicio
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Controles -->
+        <div class="controls">
+            <button class="btn btn-secondary" id="prevBtn" onclick="changeSlide(-1)">
+                <i class="fa-solid fa-chevron-left"></i> Anterior
+            </button>
+            <button class="btn" id="nextBtn" onclick="changeSlide(1)">
+                Siguiente <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de la presentación
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.getElementById('progress-fill');
+        const currentSlideDisplay = document.getElementById('current-slide');
+        const totalSlidesDisplay = document.getElementById('total-slides');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slidesWrapper = document.getElementById('slides-wrapper');
+
+        // Inicializar contadores
+        totalSlidesDisplay.textContent = totalSlides;
+
+        function updateUI() {
+            // Actualizar clases de slides
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            // Actualizar barra de progreso
+            const progressPercentage = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+
+            // Actualizar número de slide
+            currentSlideDisplay.textContent = currentSlide + 1;
+
+            // Estado de botones
+            prevBtn.disabled = currentSlide === 0;
+            if (currentSlide === totalSlides - 1) {
+                nextBtn.innerHTML = 'Finalizar <i class="fa-solid fa-check"></i>';
+            } else {
+                nextBtn.innerHTML = 'Siguiente <i class="fa-solid fa-chevron-right"></i>';
+            }
+        }
+
+        function changeSlide(direction) {
+            const newIndex = currentSlide + direction;
+            if (newIndex >= 0 && newIndex < totalSlides) {
+                currentSlide = newIndex;
+                updateUI();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateUI();
+        }
+
+        // Soporte para teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        // Soporte para gestos táctiles (Swipe)
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slidesWrapper.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slidesWrapper.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) changeSlide(1); // Swipe izquierda -> Siguiente
+            if (touchEndX > touchStartX + 50) changeSlide(-1); // Swipe derecha -> Anterior
+        }
+
+        // Inicializar
+        updateUI();
+
+    </script>
+</body>
+</html>
