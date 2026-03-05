@@ -27,26 +27,29 @@
             box-sizing: border-box; 
         }
 
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Evita scroll en el body, lo manejamos en el contenedor */
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #eef2f5 0%, #e6e9f0 100%);
             color: var(--text-color);
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
 
         .app-container {
             width: 100%;
             height: 100%;
             max-width: 1100px;
-            max-height: 96vh;
+            max-height: 100vh;
             background: var(--white);
             position: relative;
             box-shadow: var(--shadow);
-            overflow: hidden;
             display: flex;
             flex-direction: column;
         }
@@ -54,11 +57,12 @@
         @media (min-width: 768px) {
             .app-container {
                 border-radius: var(--radius);
-                height: 94vh;
+                height: 96vh;
                 border: 1px solid rgba(230, 0, 18, 0.1);
             }
         }
 
+        /* --- HEADER Y PROGRESO --- */
         .top-bar {
             background: var(--white);
             padding: 10px 15px;
@@ -69,32 +73,38 @@
             z-index: 20;
             min-height: 60px;
             gap: 10px;
+            flex-shrink: 0; /* Evita que se encabezado se encoja */
         }
 
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             color: var(--ajinomoto-red);
-            font-size: 1rem;
+            font-size: 0.9rem; /* Ajustado para móviles */
             display: flex;
             align-items: center;
             gap: 6px;
             text-transform: uppercase;
+        }
+        
+        @media (min-width: 480px) {
+            .logo { font-size: 1rem; }
         }
 
         .forms-top-btn {
             background-color: var(--ajinomoto-red); 
             color: white;
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 6px 12px;
             border-radius: 50px; 
             font-weight: 800;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             box-shadow: 0 4px 10px rgba(230, 0, 18, 0.4); 
             animation: pulse-red 2s infinite; 
+            white-space: nowrap;
         }
 
         .slide-indicator {
@@ -104,49 +114,64 @@
             background: #f0f0f0;
             padding: 4px 10px;
             border-radius: 15px;
+            white-space: nowrap;
         }
 
         .progress-line {
             height: 4px;
             background: #eee;
             width: 100%;
+            flex-shrink: 0;
         }
 
         .progress-fill {
             height: 100%;
             background: var(--ajinomoto-red);
             width: 0%;
-            transition: width 0.4s ease;
+            transition: width 0.3s ease;
         }
 
+        /* --- AREA DE DESLIZAMIENTO VERTICAL --- */
         .slides-area {
             flex: 1;
             position: relative;
-            overflow: hidden;
-            background: #fff;
+            /* Clave para el scroll vertical */
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            height: 100%; /* Asegura que ocupe el espacio restante */
+            /* Ocultar scrollbar visualmente pero mantener funcionalidad */
+            scrollbar-width: thin; 
+            scrollbar-color: var(--ajinomoto-red) #eee;
         }
 
+        /* Estilos personalizados del scrollbar (Webkit) */
+        .slides-area::-webkit-scrollbar { width: 6px; }
+        .slides-area::-webkit-scrollbar-track { background: #f1f1f1; }
+        .slides-area::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+        .slides-area::-webkit-scrollbar-thumb:hover { background: var(--ajinomoto-red); }
+
         .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
+            min-height: 100%; /* Ocupa al menos el 100% del contenedor */
             width: 100%;
-            height: 100%;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
+            justify-content: center; /* Centrado vertical por defecto */
+            
+            /* Propiedades de Scroll Snap */
+            scroll-snap-align: start;
+            scroll-snap-stop: always; /* Fuerza a detenerse en cada slide */
+            
+            /* Permite scroll interno si el contenido excede la altura */
             overflow-y: auto; 
         }
 
+        /* Clase para cuando el slide es visible (para animaciones si se desea) */
         .slide.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            /* Ya no usamos opacity 0/1 para ocultar, porque están todos en el flujo */
             z-index: 5;
         }
 
@@ -169,11 +194,11 @@
             padding-bottom: 5px;
         }
 
-        h3 { color: var(--ajinomoto-red); font-size: 1rem; margin: 10px 0; width: 100%; max-width: 800px; }
+        h3 { color: var(--ajinomoto-red); font-size: 1rem; margin: 10px 0; width: 100%; max-width: 800px; text-align: left;}
 
-        p, li { font-size: 0.95rem; line-height: 1.5; color: #555; margin-bottom: 8px; }
+        p, li { font-size: 0.95rem; line-height: 1.5; color: #555; margin-bottom: 8px; text-align: left; }
 
-        /* --- EDICIÓN SOLICITADA: Cuadros Flexibles --- */
+        /* --- ESTILOS DE CONTENIDO --- */
         .grid-options {
             display: flex;
             flex-wrap: wrap;
@@ -191,10 +216,8 @@
             padding: 15px;
             box-shadow: var(--card-shadow);
             border-left: 4px solid var(--ajinomoto-red);
-            /* Tamaño ajustado a las palabras */
-            width: fit-content;
-            min-width: 250px;
-            max-width: 100%;
+            width: 100%;
+            max-width: 350px; /* Ancho máximo para móviles */
             text-align: left;
         }
 
@@ -215,9 +238,8 @@
             margin: 5px;
             border-radius: 0 8px 8px 0;
             box-shadow: var(--card-shadow);
-            width: fit-content;
-            min-width: 220px;
-            max-width: 100%;
+            width: 100%;
+            max-width: 350px;
         }
 
         .time-badge {
@@ -248,6 +270,7 @@
             max-width: 800px;
             border-left: 4px solid #ffc107;
             background: #fffde7;
+            text-align: left;
         }
 
         .warning-box { border-left-color: var(--ajinomoto-red); background: #fff5f5; }
@@ -256,17 +279,11 @@
             background: #f9f9f9;
             border-left: 4px solid var(--ajinomoto-red);
             padding: 15px;
-            width: fit-content;
-            max-width: 100%;
+            width: 100%;
+            max-width: 800px;
             margin: 10px 0;
-        }
-
-        .bottom-controls {
-            padding: 15px;
-            background: var(--white);
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
+            text-align: left;
+            border-radius: 4px;
         }
 
         .nav-btn {
@@ -277,12 +294,14 @@
             border-radius: 25px;
             font-weight: 700;
             cursor: pointer;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .nav-btn.secondary { background: white; color: #333; border: 1px solid #ddd; }
-
         ul { list-style: none; padding-left: 5px; }
-        li::before { content: '•'; color: var(--ajinomoto-red); font-weight: bold; display: inline-block; width: 1em; }
+        li::before { content: '•'; color: var(--ajinomoto-red); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
 
         @keyframes pulse-red {
             0% { box-shadow: 0 0 0 0 rgba(230, 0, 18, 0.4); }
@@ -294,6 +313,7 @@
 <body>
 
     <div class="app-container">
+        <!-- BARRA SUPERIOR -->
         <div class="top-bar">
             <div class="logo"><i class="fa-solid fa-utensils"></i> AJINOMOTO PERÚ</div>
             <a href="https://forms.office.com/r/zVp4aGi22X?origin=lprLink" target="_blank" class="forms-top-btn">
@@ -302,23 +322,28 @@
             <div class="slide-indicator"><span id="current-slide-num">1</span> / 10</div>
         </div>
 
+        <!-- BARRA DE PROGRESO -->
         <div class="progress-line"><div class="progress-fill" id="progress-fill"></div></div>
 
+        <!-- AREA DE SLIDES (SCROLL VERTICAL) -->
         <div class="slides-area" id="slides-wrapper">
+            
             <div class="slide active">
-                <div style="margin-top:50px; font-size: 4rem; color: var(--ajinomoto-red);"><i class="fa-solid fa-mug-hot"></i></div>
+                <div style="margin-bottom:20px; font-size: 4rem; color: var(--ajinomoto-red);"><i class="fa-solid fa-mug-hot"></i></div>
                 <h1>LINEAMIENTOS COFFEE BREAK</h1>
                 <p>Capacitaciones Internas</p>
             </div>
 
             <div class="slide">
-                <h2>1. Objetivo</h2>
-                <p>Establecer las condiciones, criterios y responsabilidades para la gestión del servicio de coffee break en capacitaciones internas aprobadas por GDH, asegurando orden, control y eficiencia administrativa.</p>
-                <h2>2. Alcance</h2>
-                <ul>
-                    <li>Aplica exclusivamente a capacitaciones internas debidamente solicitadas y aprobadas por GDH.</li>
-                    <li><strong>No aplica</strong> para actividades distintas a capacitaciones.</li>
-                </ul>
+                <div style="width: 100%; max-width: 800px;">
+                    <h2>1. Objetivo</h2>
+                    <p>Establecer las condiciones, criterios y responsabilidades para la gestión del servicio de coffee break en capacitaciones internas aprobadas por GDH, asegurando orden, control y eficiencia administrativa.</p>
+                    <h2>2. Alcance</h2>
+                    <ul>
+                        <li>Aplica exclusivamente a capacitaciones internas debidamente solicitadas y aprobadas por GDH.</li>
+                        <li><strong>No aplica</strong> para actividades distintas a capacitaciones.</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="slide">
@@ -391,25 +416,29 @@
 
             <div class="slide">
                 <h2>5. Lineamientos</h2>
-                <h3>5.1 Solicitud de Capacitación</h3>
-                <div class="channel-info-box"><strong>Canal:</strong> El área solicitante deberá gestionar la capacitación a través de Forms dirigido a GDH.</div>
-                <h1> Solicitud de coffee break: pasos</h1>
-                <div class="grid-options">
-                    <div class="option-card"><strong>1. Solicitud:</strong> Gestionar autorización vía Forms dirigido a GDH.</div>
-                    <div class="option-card"><strong>2. Aprobación:</strong> GDH aprueba las solicitudes y realiza el pedido al proveedor.</div>
-                    <div class="option-card"><strong>3. Recepción:</strong> Recepción del pedido por GDH o el área solicitante. </div>
-                    <div class="option-card"><strong>4. Entrega:</strong> Gestión y entrega a los asistentes es responsabilidad del área.</div>
-                    <div class="option-card"><strong>5. Lista:</strong> Obligatorio entregar lista al término del coffee break.</div>
+                <div style="width: 100%; max-width: 800px;">
+                    <h3>5.1 Solicitud de Capacitación</h3>
+                    <div class="channel-info-box"><strong>Canal:</strong> El área solicitante deberá gestionar la capacitación a través de Forms dirigido a GDH.</div>
+                    <h1 style="font-size: 1.2rem;">Solicitud de coffee break: pasos</h1>
+                    <div class="grid-options">
+                        <div class="option-card"><strong>1. Solicitud:</strong> Gestionar autorización vía Forms dirigido a GDH.</div>
+                        <div class="option-card"><strong>2. Aprobación:</strong> GDH aprueba las solicitudes y realiza el pedido al proveedor.</div>
+                        <div class="option-card"><strong>3. Recepción:</strong> Recepción del pedido por GDH o el área solicitante. </div>
+                        <div class="option-card"><strong>4. Entrega:</strong> Gestión y entrega a los asistentes es responsabilidad del área.</div>
+                        <div class="option-card"><strong>5. Lista:</strong> Obligatorio entregar lista al término del coffee break.</div>
+                    </div>
                 </div>
             </div>
 
             <div class="slide">
-                <h2>5.2 Gestión del Coffee Break</h2>
-                <ul>
-                    <li>El coffee break deberá solicitarse con <strong>mínimo una semana de anticipación</strong>.</li>
-                </ul>
-                <div class="warning-box">
-                    <strong>Responsabilidad del Área:</strong> La distribución interna es responsabilidad exclusiva del área solicitante. GDH no es responsable del reparto posterior.
+                <div style="width: 100%; max-width: 800px;">
+                    <h2>5.2 Gestión del Coffee Break</h2>
+                    <ul>
+                        <li>El coffee break deberá solicitarse con <strong>mínimo una semana de anticipación</strong>.</li>
+                    </ul>
+                    <div class="warning-box">
+                        <strong>Responsabilidad del Área:</strong> La distribución interna es responsabilidad exclusiva del área solicitante. GDH no es responsable del reparto posterior.
+                    </div>
                 </div>
             </div>
 
@@ -431,38 +460,64 @@
                 </div>
             </div>
 
-            <div class="slide" style="justify-content:center;">
-                <div style="font-size:4rem; color:#28a745;"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="slide">
+                <div style="font-size:4rem; color:#28a745; margin-bottom: 15px;"><i class="fa-solid fa-circle-check"></i></div>
                 <h1>¡Gracias por tu atención!</h1>
                 <p>Sigue estos lineamientos para una gestión eficiente.</p>
                 <button class="nav-btn" onclick="goToSlide(0)">Volver al Inicio</button>
+                <!-- Espacio extra para que el botón no quede pegado al fondo en móviles -->
+                <div style="height: 20px;"></div>
             </div>
-        </div>
 
-        <div class="bottom-controls">
-            <button class="nav-btn secondary" id="btn-prev" onclick="prevSlide()">Anterior</button>
-            <button class="nav-btn" id="btn-next" onclick="nextSlide()">Siguiente</button>
         </div>
     </div>
 
     <script>
-        let currentSlideIndex = 0;
+        // Eliminamos la lógica de botones Anterior/Siguiente.
+        // Usamos IntersectionObserver para detectar qué slide está visible.
+
         const slides = document.querySelectorAll('.slide');
         const progressBar = document.getElementById('progress-fill');
         const currentNum = document.getElementById('current-slide-num');
+        const slidesContainer = document.getElementById('slides-wrapper');
 
-        function updateUI() {
-            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlideIndex));
-            progressBar.style.width = `${((currentSlideIndex + 1) / slides.length) * 100}%`;
-            currentNum.textContent = currentSlideIndex + 1;
-            document.getElementById('btn-prev').disabled = currentSlideIndex === 0;
-            document.getElementById('btn-next').textContent = currentSlideIndex === slides.length - 1 ? 'Finalizar' : 'Siguiente';
+        // Opciones del observador: se activa cuando el 50% del slide es visible
+        const observerOptions = {
+            root: slidesContainer,
+            threshold: 0.5 
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Encontrar el índice del slide visible
+                    const index = Array.from(slides).indexOf(entry.target);
+                    updateUI(index);
+                }
+            });
+        }, observerOptions);
+
+        // Observar todos los slides
+        slides.forEach(slide => observer.observe(slide));
+
+        function updateUI(index) {
+            // Asegurar índice válido
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+
+            // Actualizar barra y números
+            const percentage = ((index + 1) / slides.length) * 100;
+            progressBar.style.width = `${percentage}%`;
+            currentNum.textContent = index + 1;
         }
 
-        function nextSlide() { if (currentSlideIndex < slides.length - 1) { currentSlideIndex++; updateUI(); } }
-        function prevSlide() { if (currentSlideIndex > 0) { currentSlideIndex--; updateUI(); } }
-        function goToSlide(i) { currentSlideIndex = i; updateUI(); }
-        updateUI();
+        // Función para ir al inicio desde el último slide (scrollIntoView)
+        function goToSlide(index) {
+            slides[index].scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Inicializar UI
+        updateUI(0);
     </script>
 </body>
 </html>
