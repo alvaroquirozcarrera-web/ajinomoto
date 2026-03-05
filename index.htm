@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Lineamientos Coffee Break - Ajinomoto Perú</title>
-    <!-- Fuentes e Iconos -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -39,7 +38,6 @@
             overflow: hidden;
         }
 
-        /* Contenedor Principal */
         .app-container {
             width: 100%;
             height: 100%;
@@ -51,7 +49,6 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            border-radius: 0;
         }
 
         @media (min-width: 768px) {
@@ -62,7 +59,6 @@
             }
         }
 
-        /* --- Header Superior --- */
         .top-bar {
             background: var(--white);
             padding: 10px 15px;
@@ -72,7 +68,6 @@
             border-bottom: 1px solid #eee;
             z-index: 20;
             min-height: 60px;
-            flex-wrap: wrap; 
             gap: 10px;
         }
 
@@ -85,15 +80,8 @@
             align-items: center;
             gap: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            flex: 1; 
-        }
-        
-        @media (min-width: 480px) {
-            .logo { font-size: 1.1rem; }
         }
 
-        /* Botón Forms SUPER VISIBLE */
         .forms-top-btn {
             background-color: var(--ajinomoto-red); 
             color: white;
@@ -105,17 +93,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: var(--transition);
             box-shadow: 0 4px 10px rgba(230, 0, 18, 0.4); 
-            border: 2px solid var(--ajinomoto-red);
             animation: pulse-red 2s infinite; 
-            z-index: 30;
-        }
-
-        .forms-top-btn:hover {
-            background-color: var(--white);
-            color: var(--ajinomoto-red);
-            transform: scale(1.05); 
         }
 
         .slide-indicator {
@@ -125,11 +104,8 @@
             background: #f0f0f0;
             padding: 4px 10px;
             border-radius: 15px;
-            min-width: 45px;
-            text-align: center;
         }
 
-        /* --- Barra de Progreso --- */
         .progress-line {
             height: 4px;
             background: #eee;
@@ -138,17 +114,14 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--ajinomoto-red), #ff4d5a);
+            background: var(--ajinomoto-red);
             width: 0%;
             transition: width 0.4s ease;
-            box-shadow: 0 0 8px rgba(230, 0, 18, 0.5);
         }
 
-        /* --- Área de Diapositivas --- */
         .slides-area {
             flex: 1;
             position: relative;
-            width: 100%;
             overflow: hidden;
             background: #fff;
         }
@@ -159,25 +132,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            padding: 10px 15px; /* Ajustado para dar más ancho al texto en móvil */
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             align-items: center;
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+            transition: all 0.4s ease;
             overflow-y: auto; 
-            text-align: center;
         }
-
-        @media (min-width: 768px) {
-            .slide { padding: 20px; }
-        }
-
-        .slide::-webkit-scrollbar { display: none; }
-        .slide { -ms-overflow-style: none; scrollbar-width: none; }
 
         .slide.active {
             opacity: 1;
@@ -186,777 +150,318 @@
             z-index: 5;
         }
 
-        /* --- Estilos de Contenido Responsivo --- */
         h1 {
             font-family: 'Montserrat', sans-serif;
             color: var(--ajinomoto-red);
             font-size: 1.4rem; 
-            margin-bottom: 10px;
-            line-height: 1.1;
+            margin-bottom: 15px;
+            text-align: center;
         }
-        
-        @media (min-width: 480px) { h1 { font-size: 1.6rem; } }
 
         h2 {
             font-family: 'Montserrat', sans-serif;
             color: var(--ajinomoto-dark);
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            align-self: flex-start;
+            font-size: 1.2rem;
+            margin: 15px 0;
             width: 100%;
             max-width: 800px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #f0f0f0;
-            position: relative;
+            border-bottom: 2px solid var(--ajinomoto-red);
+            padding-bottom: 5px;
         }
 
-        @media (min-width: 480px) { h2 { font-size: 1.3rem; margin-bottom: 15px; } }
+        h3 { color: var(--ajinomoto-red); font-size: 1rem; margin: 10px 0; width: 100%; max-width: 800px; }
 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--ajinomoto-red);
-        }
+        p, li { font-size: 0.95rem; line-height: 1.5; color: #555; margin-bottom: 8px; }
 
-        h3 {
-            color: var(--ajinomoto-dark);
-            font-size: 1rem;
-            margin-bottom: 8px;
-            margin-top: 8px;
-            font-weight: 700;
-        }
-
-        p, li {
-            font-size: 0.9rem; 
-            line-height: 1.5;
-            color: #555;
-            margin-bottom: 8px;
-            text-align: left;
-        }
-
-        @media (min-width: 480px) { p, li { font-size: 0.95rem; } }
-
-        ul {
-            list-style: none;
-            width: 100%;
-            max-width: 800px;
-            margin-top: 5px;
-        }
-
-        li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 6px;
-        }
-
-        li::before {
-            content: '\f054'; 
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: var(--ajinomoto-red);
-            position: absolute;
-            left: 0;
-            top: 2px;
-            font-size: 0.7rem;
-        }
-
-        /* --- Caja Especial para "Canal" (Solución al problema móvil) --- */
-        .channel-info-box {
-            background: #f9f9f9;
-            border-left: 4px solid var(--ajinomoto-red);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 15px;
-            width: 100%; /* Ocupa todo el ancho disponible */
-            box-sizing: border-box; /* Asegura que el padding no rompa el ancho */
-            text-align: left;
-        }
-
-        .channel-info-box p {
-            margin: 0;
-            word-wrap: break-word; /* Fuerza el salto de línea en palabras largas */
-            overflow-wrap: break-word;
-            line-height: 1.4;
-        }
-
-        /* --- Grids Adaptativos --- */
+        /* --- EDICIÓN SOLICITADA: Cuadros Flexibles --- */
         .grid-options {
-            display: grid;
-            grid-template-columns: 1fr; 
-            gap: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 600px) {
-            .grid-options { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (min-width: 992px) {
-            .grid-options { grid-template-columns: repeat(3, 1fr); }
+            max-width: 1000px;
+            margin: 10px auto;
         }
 
         .option-card {
             background: #fff;
             border: 1px solid #eee;
             border-radius: 10px;
-            padding: 12px;
+            padding: 15px;
             box-shadow: var(--card-shadow);
-            transition: var(--transition);
+            border-left: 4px solid var(--ajinomoto-red);
+            /* Tamaño ajustado a las palabras */
+            width: fit-content;
+            min-width: 250px;
+            max-width: 100%;
             text-align: left;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .option-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--ajinomoto-red);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-            transform-origin: bottom;
-        }
-
-        .option-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(230, 0, 18, 0.15);
-            border-color: rgba(230, 0, 18, 0.2);
-        }
-
-        .option-card:hover::before {
-            transform: scaleY(1);
         }
 
         .card-header {
-            background: linear-gradient(135deg, #fff0f0 0%, #ffffff 100%);
             color: var(--ajinomoto-red);
-            padding: 6px;
-            border-radius: 6px;
             font-weight: 800;
             margin-bottom: 10px;
-            text-align: center;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
-            border: 1px solid rgba(230,0,18,0.1);
-            font-size: 0.85rem;
+            gap: 8px;
+            font-size: 0.95rem;
         }
 
-        /* --- Líneas de tiempo --- */
         .timeline-item {
-            display: flex;
-            flex-direction: column;
             background: #fff;
             border-left: 4px solid var(--ajinomoto-red);
-            padding: 10px 12px;
-            margin-bottom: 10px;
+            padding: 15px;
+            margin: 5px;
             border-radius: 0 8px 8px 0;
-            width: 100%;
-            max-width: 750px;
-            margin-left: auto;
-            margin-right: auto;
             box-shadow: var(--card-shadow);
-            transition: var(--transition);
-        }
-        
-        .timeline-item:hover {
-            transform: translateX(3px);
-            background: #fffbfb;
+            width: fit-content;
+            min-width: 220px;
+            max-width: 100%;
         }
 
         .time-badge {
             background: var(--ajinomoto-red);
             color: white;
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 15px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            align-self: flex-start;
-            margin-bottom: 6px;
-            box-shadow: 0 2px 5px rgba(230,0,18,0.2);
+            display: inline-block;
+            margin-bottom: 10px;
         }
 
         .combo-box {
             background: #f8f9fa;
-            padding: 6px 10px;
-            margin-top: 2px;
+            padding: 8px;
             border-radius: 6px;
-            font-size: 0.85rem;
-            color: var(--ajinomoto-dark);
+            font-size: 0.9rem;
             border: 1px dashed #ccc;
-            font-weight: 500;
+            margin: 5px 0;
         }
 
-        .or-separator {
-            text-align: center;
-            font-size: 0.7rem;
-            color: #999;
-            margin: 3px 0;
-            font-style: italic;
+        .note-box, .warning-box {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 800px;
+            border-left: 4px solid #ffc107;
+            background: #fffde7;
         }
 
-        /* --- Controles Inferiores --- */
+        .warning-box { border-left-color: var(--ajinomoto-red); background: #fff5f5; }
+
+        .channel-info-box {
+            background: #f9f9f9;
+            border-left: 4px solid var(--ajinomoto-red);
+            padding: 15px;
+            width: fit-content;
+            max-width: 100%;
+            margin: 10px 0;
+        }
+
         .bottom-controls {
-            padding: 12px 15px; 
+            padding: 15px;
             background: var(--white);
             border-top: 1px solid #eee;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            z-index: 10;
         }
 
         .nav-btn {
             background: var(--ajinomoto-red);
             color: white;
             border: none;
-            padding: 10px 16px; 
+            padding: 10px 25px;
             border-radius: 25px;
-            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: 0.85rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-            box-shadow: 0 4px 10px rgba(230, 0, 18, 0.3);
-            min-height: 40px; 
         }
 
-        .nav-btn:hover {
-            background: var(--ajinomoto-red-dark);
-            transform: translateY(-2px);
-        }
+        .nav-btn.secondary { background: white; color: #333; border: 1px solid #ddd; }
 
-        .nav-btn:disabled {
-            background: #e0e0e0;
-            color: #aaa;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-
-        .nav-btn.secondary {
-            background: var(--white);
-            color: var(--ajinomoto-dark);
-            border: 2px solid #eee;
-            box-shadow: none;
-        }
-        
-        .nav-btn.secondary:hover {
-            border-color: var(--ajinomoto-red);
-            color: var(--ajinomoto-red);
-            background: #fff5f5;
-        }
-
-        /* --- Elementos Gráficos --- */
-        .hero-graphic {
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, #fff0f0 0%, #fff 70%);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 15px;
-            position: relative;
-        }
-        
-        @media (min-width: 480px) {
-            .hero-graphic { width: 120px; height: 120px; margin-bottom: 20px; }
-        }
-        
-        .hero-icon {
-            font-size: 2.5rem;
-            color: var(--ajinomoto-red);
-            z-index: 2;
-        }
-        
-        @media (min-width: 480px) { .hero-icon { font-size: 3.5rem; } }
-
-        .hero-icon-bg {
-            position: absolute;
-            font-size: 4rem;
-            color: rgba(230, 0, 18, 0.05);
-            transform: rotate(15deg);
-            z-index: 1;
-        }
-
-        .icon-large {
-            font-size: 2.5rem;
-            color: var(--ajinomoto-red);
-            margin-bottom: 10px;
-        }
-
-        /* --- Cajas Info --- */
-        .note-box, .warning-box {
-            padding: 10px 12px;
-            border-radius: 6px;
-            margin-top: 10px;
-            text-align: left;
-            font-size: 0.85rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 750px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .note-box {
-            background: linear-gradient(to right, #fff9db, #fff);
-            color: #856404;
-            border-left: 4px solid #ffc107;
-        }
-
-        .warning-box {
-            background: linear-gradient(to right, #f8d7da, #fff);
-            color: #721c24;
-            border-left: 4px solid var(--ajinomoto-red);
-        }
-
-        /* Enlaces */
-        a {
-            color: var(--ajinomoto-red);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.3s;
-            cursor: pointer;
-            word-break: break-all; 
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* --- Animaciones --- */
-        .animate-element {
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        
-        .slide.active .animate-element {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .delay-1 { transition-delay: 0.05s; }
-        .delay-2 { transition-delay: 0.1s; }
-        .delay-3 { transition-delay: 0.15s; }
-        .delay-4 { transition-delay: 0.2s; }
-        .delay-5 { transition-delay: 0.25s; }
-        .delay-6 { transition-delay: 0.3s; }
+        ul { list-style: none; padding-left: 5px; }
+        li::before { content: '•'; color: var(--ajinomoto-red); font-weight: bold; display: inline-block; width: 1em; }
 
         @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(230, 0, 18, 0.7); }
+            0% { box-shadow: 0 0 0 0 rgba(230, 0, 18, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(230, 0, 18, 0); }
             100% { box-shadow: 0 0 0 0 rgba(230, 0, 18, 0); }
         }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
-            40% {transform: translateY(-10px);} 
-            60% {transform: translateY(-5px);}
-        }
-
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- Top Bar -->
         <div class="top-bar">
-            <div class="logo">
-                <i class="fa-solid fa-utensils"></i> AJINOMOTO PERÚ
-            </div>
-            
-            <!-- Botón Forms MÁS VISIBLE -->
-            <a href="https://forms.office.com/r/zVp4aGi22X?origin=lprLink" target="_blank" class="forms-top-btn" title="Ir al formulario de solicitud">
-                <i class="fa-solid fa-file-pen"></i> <span style="display:none; @media(min-width:380px){display:inline;}">Forms</span>
+            <div class="logo"><i class="fa-solid fa-utensils"></i> AJINOMOTO PERÚ</div>
+            <a href="https://forms.office.com/r/zVp4aGi22X?origin=lprLink" target="_blank" class="forms-top-btn">
+                <i class="fa-solid fa-file-pen"></i> Ir al Forms
             </a>
-
-            <div class="slide-indicator">
-                <span id="current-slide-num">1</span> / <span id="total-slides-num">10</span>
-            </div>
+            <div class="slide-indicator"><span id="current-slide-num">1</span> / 10</div>
         </div>
 
-        <!-- Progress Bar -->
-        <div class="progress-line">
-            <div class="progress-fill" id="progress-fill"></div>
-        </div>
+        <div class="progress-line"><div class="progress-fill" id="progress-fill"></div></div>
 
-        <!-- Slides Area -->
         <div class="slides-area" id="slides-wrapper">
-            
-            <!-- Slide 1: Portada -->
             <div class="slide active">
-                <div class="hero-graphic animate-element">
-                    <i class="fa-solid fa-mug-hot hero-icon"></i>
-                    <i class="fa-solid fa-wheat-awn hero-icon-bg"></i>
-                </div>
-                <h1 class="animate-element delay-1">LINEAMIENTOS COFFEE BREAK</h1>
-                <p class="animate-element delay-2" style="font-size: 1rem; text-align: center; color: #666;">Capacitaciones Internas</p>
-                <div class="animate-element delay-3" style="margin-top: 15px;">
-                    <i class="fa-solid fa-chevron-down" style="font-size: 1.2rem; color: var(--ajinomoto-red); animation: bounce 2s infinite;"></i>
-                </div>
+                <div style="margin-top:50px; font-size: 4rem; color: var(--ajinomoto-red);"><i class="fa-solid fa-mug-hot"></i></div>
+                <h1>LINEAMIENTOS COFFEE BREAK</h1>
+                <p>Capacitaciones Internas</p>
             </div>
 
-            <!-- Slide 2: Objetivo y Alcance -->
             <div class="slide">
-                <h2 class="animate-element">1. Objetivo</h2>
-                <p class="animate-element delay-1">
-                    Establecer las condiciones, criterios y responsabilidades para la gestión del servicio de coffee break en capacitaciones internas aprobadas por GDH, asegurando orden, control y eficiencia administrativa.
-                </p>
-
-                <h2 class="animate-element delay-2">2. Alcance</h2>
-                <ul class="animate-element delay-3">
+                <h2>1. Objetivo</h2>
+                <p>Establecer las condiciones, criterios y responsabilidades para la gestión del servicio de coffee break en capacitaciones internas aprobadas por GDH, asegurando orden, control y eficiencia administrativa.</p>
+                <h2>2. Alcance</h2>
+                <ul>
                     <li>Aplica exclusivamente a capacitaciones internas debidamente solicitadas y aprobadas por GDH.</li>
-                    <li><strong>No aplica</strong> para actividades distintas a capacitaciones</li>
+                    <li><strong>No aplica</strong> para actividades distintas a capacitaciones.</li>
                 </ul>
             </div>
 
-            <!-- Slide 3: Servicio Base -->
             <div class="slide">
-                <h2 class="animate-element">3. Servicio Base</h2>
-                <div class="grid-options animate-element delay-1">
-                    
-                    <!-- Opción 1 -->
+                <h2>3. Servicio Base</h2>
+                <div class="grid-options">
                     <div class="option-card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-wheat-awn"></i> Opción 1
-                        </div>
+                        <div class="card-header"><i class="fa-solid fa-wheat-awn"></i> Opción 1</div>
                         <ul>
                             <li>1 barra (cereal, granola, avena, quinua, etc.)</li>
-                            <li>1 galleta (vainilla, cacao, chispas de chocolate, integral, avena, etc.)</li>
-                            <li>1 bebida (jugo, néctar, bebida frutal tipo frugos, yogurt bebible o agua)</li>
+                            <li>1 galleta (vainilla, cacao, chispas, integral, etc.)</li>
+                            <li>1 bebida (jugo, néctar, yogurt o agua)</li>
                         </ul>
                     </div>
-
-                    <!-- Opción 2 -->
                     <div class="option-card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-cookie-bite"></i> Opción 2
-                        </div>
+                        <div class="card-header"><i class="fa-solid fa-cookie-bite"></i> Opción 2</div>
                         <ul>
-                            <li>1 snack dulce (barra, muffin pequeño, queque o brownie individual)</li>
+                            <li>1 snack dulce (barra, muffin, queque o brownie)</li>
                             <li>1 galleta (integral, coco, naranja, vainilla, etc.)</li>
-                            <li>1 bebida (jugo natural, néctar, bebida frutal, yogurt bebible o agua)</li>
+                            <li>1 bebida (jugo natural, néctar, yogurt o agua)</li>
                         </ul>
                     </div>
-
-                    <!-- Opción 3 -->
                     <div class="option-card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-burger"></i> Opción 3
-                        </div>
+                        <div class="card-header"><i class="fa-solid fa-burger"></i> Opción 3</div>
                         <ul>
                             <li>Pan con pollo</li>
                             <li>Refrescos (chicha, maracuyá u otros similares)</li>
                         </ul>
                     </div>
-
                 </div>
             </div>
 
-            <!-- Slide 4: Duración (1h a 4h) -->
             <div class="slide">
-                <h2 class="animate-element">4. Servicio según Duración (Parte 1)</h2>
-                
-                <div class="timeline-item animate-element delay-1">
-                    <div class="time-badge">1 hora hasta 1h 30m</div>
-                    <div class="combo-box">Opción 1</div>
-                </div>
-
-                <div class="timeline-item animate-element delay-2">
-                    <div class="time-badge">Hasta 2 horas</div>
-                    <div class="combo-box">Opción 1 + Opción 2</div>
-                </div>
-
-                <div class="timeline-item animate-element delay-3">
-                    <div class="time-badge">Hasta 4 horas</div>
-                    <div class="combo-box">Opción 3 + Opción 1</div>
-                    <div class="or-separator">O bien:</div>
-                    <div class="combo-box">Opción 3 + Opción 2</div>
-                    <div class="or-separator">O bien:</div>
-                    <div class="combo-box">Opción 1 + Opción 2</div>
+                <h2>4. Servicio según Duración (Parte 1)</h2>
+                <div class="grid-options">
+                    <div class="timeline-item">
+                        <div class="time-badge">1 hora hasta 1h 30m</div>
+                        <div class="combo-box">Opción 1</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time-badge">Hasta 2 horas</div>
+                        <div class="combo-box">Opción 1 u Opción 2</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time-badge">Hasta 4 horas</div>
+                        <p>Alternativas:</p>
+                        <div class="combo-box">Opción 3 + Opción 1</div>
+                        <div class="combo-box">Opción 3 + Opción 2</div>
+                        <div class="combo-box">Opción 1 + Opción 2</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Slide 5: Duración (6h a 8h) -->
             <div class="slide">
-                <h2 class="animate-element">4. Servicio según Duración (Parte 2)</h2>
-                
-                <div class="timeline-item animate-element delay-1">
-                    <div class="time-badge">Hasta 6 horas</div>
-                    <div class="combo-box">Opción 3 + Opción 1 + Opción 1</div>
-                    <div class="or-separator">O bien:</div>
-                    <div class="combo-box">Opción 3 + Opción 2 + Opción 1</div>
-                    <div class="or-separator">O bien:</div>
-                    <div class="combo-box">Opción 3 + Opción 2 + Opción 2</div>
+                <h2>4. Servicio según Duración (Parte 2)</h2>
+                <div class="grid-options">
+                    <div class="timeline-item">
+                        <div class="time-badge">Hasta 6 horas</div>
+                        <div class="combo-box">Opción 3 + Opción 1 + Opción 1</div>
+                        <div class="combo-box">Opción 3 + Opción 2 + Opción 1</div>
+                        <div class="combo-box">Opción 3 + Opción 2 + Opción 2</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time-badge">Hasta 8 horas</div>
+                        <div class="combo-box">Opción 3 + Opción 3 + Opción 1</div>
+                        <div class="combo-box">Opción 3 + Opción 3 + Opción 2</div>
+                    </div>
                 </div>
+                <div class="note-box"><strong>Importante:</strong> Cualquier variación deberá contar con aprobación expresa de GDH.</div>
+            </div>
 
-                <div class="timeline-item animate-element delay-2">
-                    <div class="time-badge">Hasta 8 horas</div>
-                    <div class="combo-box">Opción 3 + Opción 3 + Opción 1</div>
-                    <div class="or-separator">O bien:</div>
-                    <div class="combo-box">Opción 3 + Opción 3 + Opción 2</div>
-                </div>
-
-                <div class="note-box animate-element delay-3">
-                    <i class="fa-solid fa-circle-info"></i> <strong>Importante:</strong> Cualquier variación deberá contar con aprobación expresa de GDH.
+            <div class="slide">
+                <h2>5. Lineamientos</h2>
+                <h3>5.1 Solicitud de Capacitación</h3>
+                <div class="channel-info-box"><strong>Canal:</strong> El área solicitante deberá gestionar la capacitación a través de Forms dirigido a GDH.</div>
+                <h1> Solicitud de coffee break: pasos</h1>
+                <div class="grid-options">
+                    <div class="option-card"><strong>1. Solicitud:</strong> Gestionar autorización vía Forms dirigido a GDH.</div>
+                    <div class="option-card"><strong>2. Aprobación:</strong> GDH aprueba las solicitudes y realiza el pedido al proveedor.</div>
+                    <div class="option-card"><strong>3. Recepción:</strong> Recepción del pedido por GDH o el área solicitante. </div>
+                    <div class="option-card"><strong>4. Entrega:</strong> Gestión y entrega a los asistentes es responsabilidad del área.</div>
+                    <div class="option-card"><strong>5. Lista:</strong> Obligatorio entregar lista al término del coffee break.</div>
                 </div>
             </div>
 
-            <!-- Slide 6: Lineamientos - Solicitud -->
             <div class="slide">
-                <h2 class="animate-element">5. Lineamientos</h2>
-                <h3 class="animate-element delay-1" style="color: var(--ajinomoto-red);">5.1 Solicitud de Capacitación</h3>
-                
-                <!-- Caja corregida para móvil -->
-                <div class="channel-info-box animate-element delay-2">
-                    <p><strong>Canal:</strong> El área solicitante deberá gestionar la capacitación a través de <em>Forms</em> dirigido a GDH.</p>
-                </div>
-
-                <p class="animate-element delay-2" style="font-weight:700; margin-top:10px;">Pasos para solicitar el pedido:</p>
-                
-                <!-- Grid Responsivo para Pasos -->
-                <div class="grid-options animate-element delay-3" style="grid-template-columns: 1fr; @media(min-width:600px){grid-template-columns: repeat(2, 1fr);} gap: 10px; max-width: 900px;">
-                    
-                    <div class="option-card" style="padding: 12px;">
-                        <div style="color:var(--ajinomoto-red); font-size:1.5rem; margin-bottom:5px; font-weight:800;">1</div>
-                        <strong style="display:block; margin-bottom:3px; font-size:0.9rem;">Solicitud</strong>
-                        <span style="font-size:0.85rem;">Gestionar autorización vía Forms.</span>
-                        <div style="margin-top:8px;">
-                            <a href="https://forms.office.com/r/zVp4aGi22X?origin=lprLink" target="_blank" style="font-size:0.8rem;">Ir al Forms <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="option-card" style="padding: 12px;">
-                        <div style="color:var(--ajinomoto-red); font-size:1.5rem; margin-bottom:5px; font-weight:800;">2</div>
-                        <strong style="display:block; margin-bottom:3px; font-size:0.9rem;">Aprobación GDH</strong>
-                        <span style="font-size:0.85rem;">GDH aprueba y pide al proveedor.</span>
-                    </div>
-
-                    <div class="option-card" style="padding: 12px;">
-                        <div style="color:var(--ajinomoto-red); font-size:1.5rem; margin-bottom:5px; font-weight:800;">3</div>
-                        <strong style="display:block; margin-bottom:3px; font-size:0.9rem;">Recepción</strong>
-                        <span style="font-size:0.85rem;">Recibe GDH o área solicitante.</span>
-                    </div>
-
-                    <div class="option-card" style="padding: 12px;">
-                        <div style="color:var(--ajinomoto-red); font-size:1.5rem; margin-bottom:5px; font-weight:800;">4</div>
-                        <strong style="display:block; margin-bottom:3px; font-size:0.9rem;">Entrega</strong>
-                        <span style="font-size:0.85rem;">Responsabilidad del área solicitante.</span>
-                    </div>
-
-                    <div class="option-card" style="padding: 12px; grid-column: 1 / -1;">
-                        <div style="color:var(--ajinomoto-red); font-size:1.5rem; margin-bottom:5px; font-weight:800;">5</div>
-                        <strong style="display:block; margin-bottom:3px; font-size:0.9rem;">Lista Asistentes</strong>
-                        <span style="font-size:0.85rem;">Obligatorio entregar al final.</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Slide 7: Lineamientos - Gestión -->
-            <div class="slide">
-                <h2 class="animate-element">5.2 Gestión del Coffee Break</h2>
-                <ul style="max-width: 750px;" class="animate-element delay-1">
-                    <li style="font-size: 1rem; color: var(--ajinomoto-dark);">El coffee break deberá solicitarse con <strong>mínimo una semana de anticipación</strong>.</li>
+                <h2>5.2 Gestión del Coffee Break</h2>
+                <ul>
+                    <li>El coffee break deberá solicitarse con <strong>mínimo una semana de anticipación</strong>.</li>
                 </ul>
-
-                <div class="warning-box animate-element delay-2">
-                    <i class="fa-solid fa-triangle-exclamation"></i> <strong>Responsabilidad del Área:</strong><br>
-                    La distribución interna del coffee break es responsabilidad exclusiva del área solicitante. GDH no es responsable del reparto posterior a la entrega.
+                <div class="warning-box">
+                    <strong>Responsabilidad del Área:</strong> La distribución interna es responsabilidad exclusiva del área solicitante. GDH no es responsable del reparto posterior.
                 </div>
             </div>
 
-            <!-- Slide 8: Lineamientos - Lista de Asistentes -->
             <div class="slide">
-                <div class="animate-element" style="text-align:center; margin-bottom:15px;">
-                    <i class="fa-solid fa-clipboard-check icon-large"></i>
-                </div>
-                <h2 class="animate-element delay-1" style="border:none;">5.3 Lista de Asistentes</h2>
-                
-                <div class="option-card animate-element delay-2" style="border: 2px solid var(--ajinomoto-red); background: #fff5f5; max-width: 700px; margin: 0 auto;">
-                    <p style="text-align:center; font-size:1rem; font-weight:600; color:var(--ajinomoto-dark);">
-                        Es obligatorio que el área solicitante entregue a GDH la lista de asistentes posterior a la capacitación como sustento del servicio brindado.
-                    </p>
+                <h2>5.3 Lista de Asistentes</h2>
+                <div class="option-card" style="width:100%; max-width:600px;">
+                    <p style="text-align:center;">Es obligatorio que el área solicitante entregue a GDH la lista de asistentes posterior a la capacitación como sustento del servicio brindado.</p>
                 </div>
             </div>
 
-            <!-- Slide 9: Consideraciones -->
             <div class="slide">
-                <h2 class="animate-element">6. Consideraciones</h2>
-                
-                <div class="grid-options animate-element delay-1" style="grid-template-columns: 1fr; max-width: 750px;">
-                    
-                    <div class="timeline-item">
-                        <p><i class="fa-solid fa-ban" style="color:var(--ajinomoto-red); margin-right:8px;"></i> Solo se brindará servicio para capacitaciones aprobadas por GDH.</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <p><i class="fa-solid fa-ban" style="color:var(--ajinomoto-red); margin-right:8px;"></i> No se atenderán solicitudes que no correspondan a capacitaciones.</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <p><i class="fa-solid fa-glass-water" style="color:var(--ajinomoto-red); margin-right:8px;"></i> Se priorizarán bebidas no personales (servidas en vasos o dispensadores).</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <p><i class="fa-solid fa-glass-water" style="color:var(--ajinomoto-red); margin-right:8px;"></i> No se entregarán bebidas individuales, salvo excepción autorizada.</p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <p><i class="fa-solid fa-calendar-days" style="color:var(--ajinomoto-red); margin-right:8px;"></i> El corte de solicitudes es el día 19 de cada mes. Las solicitudes ingresadas desde el día 20 se considerarán para el mes siguiente.
-                        </p>
-                    </div>
-
-                    <div class="timeline-item">
-                        <p><i class="fa-solid fa-clock" style="color:var(--ajinomoto-red); margin-right:8px;"></i> La anticipación es indispensable para evitar exclusiones en la facturación.</p>
-                    </div>
-
+                <h2>6. Consideraciones</h2>
+                <div class="grid-options">
+                    <div class="timeline-item">Solo capacitaciones aprobadas por GDH.</div>
+                    <div class="timeline-item">No se atienden pedidos ajenos a capacitación.</div>
+                    <div class="timeline-item">Priorizar bebidas en vaso para reducir contaminación; evitar botellas personales. Ej.: frugos en vaso.</div>
+                    <div class="timeline-item">Corte de solicitudes: <strong>Día 19 de cada mes</strong>.</div>
+                    <div class="timeline-item">Pedidos desde el día 20 pasan al mes siguiente.</div>
                 </div>
             </div>
 
-            <!-- Slide 10: Cierre -->
-            <div class="slide" style="justify-content: center; text-align: center;">
-                <div class="hero-graphic animate-element" style="margin-bottom: 15px; background: radial-gradient(circle, #e6ffed 0%, #fff 70%);">
-                    <i class="fa-solid fa-check-circle hero-icon" style="color: #28a745;"></i>
-                </div>
-                <h2 class="animate-element delay-1" style="border:none; text-align: center;">¡Gracias por tu atención!</h2>
-                <p class="animate-element delay-2" style="text-align: center;">Recuerda seguir estos lineamientos para asegurar una gestión eficiente y transparente.</p>
-                
-                <div style="margin-top:30px;" class="animate-element delay-3">
-                    <button class="nav-btn secondary" onclick="goToSlide(0)">
-                        <i class="fa-solid fa-rotate-left"></i> Volver al Inicio
-                    </button>
-                </div>
+            <div class="slide" style="justify-content:center;">
+                <div style="font-size:4rem; color:#28a745;"><i class="fa-solid fa-circle-check"></i></div>
+                <h1>¡Gracias por tu atención!</h1>
+                <p>Sigue estos lineamientos para una gestión eficiente.</p>
+                <button class="nav-btn" onclick="goToSlide(0)">Volver al Inicio</button>
             </div>
-
         </div>
 
-        <!-- Bottom Controls -->
         <div class="bottom-controls">
-            <button class="nav-btn secondary" id="btn-prev" onclick="prevSlide()">
-                <i class="fa-solid fa-chevron-left"></i> Anterior
-            </button>
-            <button class="nav-btn" id="btn-next" onclick="nextSlide()">
-                Siguiente <i class="fa-solid fa-chevron-right"></i>
-            </button>
+            <button class="nav-btn secondary" id="btn-prev" onclick="prevSlide()">Anterior</button>
+            <button class="nav-btn" id="btn-next" onclick="nextSlide()">Siguiente</button>
         </div>
     </div>
 
     <script>
-        // Variables de estado
         let currentSlideIndex = 0;
         const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
         const progressBar = document.getElementById('progress-fill');
         const currentNum = document.getElementById('current-slide-num');
-        const totalNum = document.getElementById('total-slides-num');
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-        const slidesWrapper = document.getElementById('slides-wrapper');
 
-        // Inicializar números
-        totalNum.textContent = totalSlides;
-
-        // Función de actualización de UI
         function updateUI() {
-            // Manejo de clases de slides
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active');
-                if (index === currentSlideIndex) {
-                    slide.classList.add('active');
-                }
-            });
-
-            // Barra de progreso
-            const progressPercentage = ((currentSlideIndex + 1) / totalSlides) * 100;
-            progressBar.style.width = `${progressPercentage}%`;
-
-            // Número actual
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlideIndex));
+            progressBar.style.width = `${((currentSlideIndex + 1) / slides.length) * 100}%`;
             currentNum.textContent = currentSlideIndex + 1;
-
-            // Estado de botones
-            btnPrev.disabled = currentSlideIndex === 0;
-            
-            if (currentSlideIndex === totalSlides - 1) {
-                btnNext.innerHTML = 'Finalizar <i class="fa-solid fa-check"></i>';
-            } else {
-                btnNext.innerHTML = 'Siguiente <i class="fa-solid fa-chevron-right"></i>';
-            }
+            document.getElementById('btn-prev').disabled = currentSlideIndex === 0;
+            document.getElementById('btn-next').textContent = currentSlideIndex === slides.length - 1 ? 'Finalizar' : 'Siguiente';
         }
 
-        // Navegación
-        function nextSlide() {
-            if (currentSlideIndex < totalSlides - 1) {
-                currentSlideIndex++;
-                updateUI();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlideIndex > 0) {
-                currentSlideIndex--;
-                updateUI();
-            }
-        }
-
-        function goToSlide(index) {
-            currentSlideIndex = index;
-            updateUI();
-        }
-
-        // Soporte Teclado
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-
-        // Soporte Táctil (Swipe)
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        slidesWrapper.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-
-        slidesWrapper.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, {passive: true});
-
-        function handleSwipe() {
-            const threshold = 50;
-            if (touchEndX < touchStartX - threshold) {
-                nextSlide();
-            }
-            if (touchEndX > touchStartX + threshold) {
-                prevSlide();
-            }
-        }
-
-        // Iniciar
+        function nextSlide() { if (currentSlideIndex < slides.length - 1) { currentSlideIndex++; updateUI(); } }
+        function prevSlide() { if (currentSlideIndex > 0) { currentSlideIndex--; updateUI(); } }
+        function goToSlide(i) { currentSlideIndex = i; updateUI(); }
         updateUI();
     </script>
 </body>
