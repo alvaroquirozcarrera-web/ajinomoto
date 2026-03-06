@@ -30,7 +30,7 @@
         html, body {
             height: 100%;
             width: 100%;
-            overflow: hidden; /* Evita scroll en el body, lo manejamos en el contenedor */
+            overflow: hidden;
         }
 
         body {
@@ -73,14 +73,14 @@
             z-index: 20;
             min-height: 60px;
             gap: 10px;
-            flex-shrink: 0; /* Evita que se encabezado se encoja */
+            flex-shrink: 0;
         }
 
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
             color: var(--ajinomoto-red);
-            font-size: 0.9rem; /* Ajustado para móviles */
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -107,6 +107,7 @@
             white-space: nowrap;
         }
 
+        /* Eliminamos el contador numérico porque ya no hay secciones, solo scroll */
         .slide-indicator {
             font-size: 0.75rem;
             font-weight: 700;
@@ -115,6 +116,7 @@
             padding: 4px 10px;
             border-radius: 15px;
             white-space: nowrap;
+            display: none; /* Oculto ya que es una sola página larga */
         }
 
         .progress-line {
@@ -128,51 +130,37 @@
             height: 100%;
             background: var(--ajinomoto-red);
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.1s ease;
         }
 
-        /* --- AREA DE DESLIZAMIENTO VERTICAL --- */
-        .slides-area {
+        /* --- AREA DE CONTENIDO UNICO --- */
+        .content-scroll-area {
             flex: 1;
-            position: relative;
-            /* Clave para el scroll vertical */
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
+            overflow-y: scroll; /* Scroll normal */
             scroll-behavior: smooth;
-            height: 100%; /* Asegura que ocupe el espacio restante */
-            /* Ocultar scrollbar visualmente pero mantener funcionalidad */
+            height: 100%;
+            padding: 20px;
+            /* Scrollbar styling */
             scrollbar-width: thin; 
             scrollbar-color: var(--ajinomoto-red) #eee;
         }
 
-        /* Estilos personalizados del scrollbar (Webkit) */
-        .slides-area::-webkit-scrollbar { width: 6px; }
-        .slides-area::-webkit-scrollbar-track { background: #f1f1f1; }
-        .slides-area::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
-        .slides-area::-webkit-scrollbar-thumb:hover { background: var(--ajinomoto-red); }
+        .content-scroll-area::-webkit-scrollbar { width: 6px; }
+        .content-scroll-area::-webkit-scrollbar-track { background: #f1f1f1; }
+        .content-scroll-area::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+        .content-scroll-area::-webkit-scrollbar-thumb:hover { background: var(--ajinomoto-red); }
 
-        .slide {
-            position: relative;
-            min-height: 100%; /* Ocupa al menos el 100% del contenedor */
+        /* Contenedor para separar visualmente los antiguos slides */
+        .content-block {
             width: 100%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center; /* Centrado vertical por defecto */
-            
-            /* Propiedades de Scroll Snap */
-            scroll-snap-align: start;
-            scroll-snap-stop: always; /* Fuerza a detenerse en cada slide */
-            
-            /* Permite scroll interno si el contenido excede la altura */
-            overflow-y: auto; 
+            max-width: 800px;
+            margin: 0 auto 40px auto; /* Margen inferior para separar secciones */
+            padding-bottom: 40px;
+            border-bottom: 1px dashed #eee;
         }
-
-        /* Clase para cuando el slide es visible (para animaciones si se desea) */
-        .slide.active {
-            /* Ya no usamos opacity 0/1 para ocultar, porque están todos en el flujo */
-            z-index: 5;
+        
+        .content-block:last-child {
+            border-bottom: none;
         }
 
         h1 {
@@ -217,7 +205,7 @@
             box-shadow: var(--card-shadow);
             border-left: 4px solid var(--ajinomoto-red);
             width: 100%;
-            max-width: 350px; /* Ancho máximo para móviles */
+            max-width: 350px;
             text-align: left;
         }
 
@@ -319,34 +307,36 @@
             <a href="https://forms.office.com/r/zVp4aGi22X?origin=lprLink" target="_blank" class="forms-top-btn">
                 <i class="fa-solid fa-file-pen"></i> Ir al Forms
             </a>
-            <div class="slide-indicator"><span id="current-slide-num">1</span> / 10</div>
+            <!-- Indicador oculto ya que no hay secciones numeradas -->
+            <div class="slide-indicator"></div>
         </div>
 
         <!-- BARRA DE PROGRESO -->
         <div class="progress-line"><div class="progress-fill" id="progress-fill"></div></div>
 
-        <!-- AREA DE SLIDES (SCROLL VERTICAL) -->
-        <div class="slides-area" id="slides-wrapper">
+        <!-- AREA DE CONTENIDO UNICO (SCROLL) -->
+        <div class="content-scroll-area" id="content-wrapper">
             
-            <div class="slide active">
+            <!-- Portada -->
+            <div class="content-block" style="text-align: center; padding-top: 20px;">
                 <div style="margin-bottom:20px; font-size: 4rem; color: var(--ajinomoto-red);"><i class="fa-solid fa-mug-hot"></i></div>
                 <h1>LINEAMIENTOS COFFEE BREAK</h1>
                 <p>Capacitaciones Internas</p>
             </div>
 
-            <div class="slide">
-                <div style="width: 100%; max-width: 800px;">
-                    <h2>1. Objetivo</h2>
-                    <p>Establecer las condiciones, criterios y responsabilidades para la gestión del servicio de coffee break en capacitaciones internas aprobadas por GDH, asegurando orden, control y eficiencia administrativa.</p>
-                    <h2>2. Alcance</h2>
-                    <ul>
-                        <li>Aplica exclusivamente a capacitaciones internas debidamente solicitadas y aprobadas por GDH.</li>
-                        <li><strong>No aplica</strong> para actividades distintas a capacitaciones.</li>
-                    </ul>
-                </div>
+            <!-- Objetivo y Alcance -->
+            <div class="content-block">
+                <h2>1. Objetivo</h2>
+                <p>Establecer las condiciones, criterios y responsabilidades para la gestión del servicio de coffee break en capacitaciones internas aprobadas por GDH, asegurando orden, control y eficiencia administrativa.</p>
+                <h2>2. Alcance</h2>
+                <ul>
+                    <li>Aplica exclusivamente a capacitaciones internas debidamente solicitadas y aprobadas por GDH.</li>
+                    <li><strong>No aplica</strong> para actividades distintas a capacitaciones.</li>
+                </ul>
             </div>
 
-            <div class="slide">
+            <!-- Servicio Base -->
+            <div class="content-block">
                 <h2>3. Servicio Base</h2>
                 <div class="grid-options">
                     <div class="option-card">
@@ -375,7 +365,8 @@
                 </div>
             </div>
 
-            <div class="slide">
+            <!-- Servicio según Duración (Parte 1) -->
+            <div class="content-block">
                 <h2>4. Servicio según Duración (Parte 1)</h2>
                 <div class="grid-options">
                     <div class="timeline-item">
@@ -396,7 +387,8 @@
                 </div>
             </div>
 
-            <div class="slide">
+            <!-- Servicio según Duración (Parte 2) -->
+            <div class="content-block">
                 <h2>4. Servicio según Duración (Parte 2)</h2>
                 <div class="grid-options">
                     <div class="timeline-item">
@@ -414,42 +406,42 @@
                 <div class="note-box"><strong>Importante:</strong> Cualquier variación deberá contar con aprobación expresa de GDH.</div>
             </div>
 
-            <div class="slide">
+            <!-- Lineamientos -->
+            <div class="content-block">
                 <h2>5. Lineamientos</h2>
-                <div style="width: 100%; max-width: 800px;">
-                    <h3>5.1 Solicitud de Capacitación</h3>
-                    <div class="channel-info-box"><strong>Canal:</strong> El área solicitante deberá gestionar la capacitación a través de Forms dirigido a GDH.</div>
-                    <h1 style="font-size: 1.2rem;">Solicitud de coffee break: pasos</h1>
-                    <div class="grid-options">
-                        <div class="option-card"><strong>1. Solicitud:</strong> Gestionar autorización vía Forms dirigido a GDH.</div>
-                        <div class="option-card"><strong>2. Aprobación:</strong> GDH aprueba las solicitudes y realiza el pedido al proveedor.</div>
-                        <div class="option-card"><strong>3. Recepción:</strong> Recepción del pedido por GDH o el área solicitante. </div>
-                        <div class="option-card"><strong>4. Entrega:</strong> Gestión y entrega a los asistentes es responsabilidad del área.</div>
-                        <div class="option-card"><strong>5. Lista:</strong> Obligatorio entregar lista al término del coffee break.</div>
-                    </div>
+                <h3>5.1 Solicitud de Capacitación</h3>
+                <div class="channel-info-box"><strong>Canal:</strong> El área solicitante deberá gestionar la capacitación a través de Forms dirigido a GDH.</div>
+                <h1 style="font-size: 1.2rem;">Solicitud de coffee break: pasos</h1>
+                <div class="grid-options">
+                    <div class="option-card"><strong>1. Solicitud:</strong> Gestionar autorización vía Forms dirigido a GDH.</div>
+                    <div class="option-card"><strong>2. Aprobación:</strong> GDH aprueba las solicitudes y realiza el pedido al proveedor.</div>
+                    <div class="option-card"><strong>3. Recepción:</strong> Recepción del pedido por GDH o el área solicitante. </div>
+                    <div class="option-card"><strong>4. Entrega:</strong> Gestión y entrega a los asistentes es responsabilidad del área.</div>
+                    <div class="option-card"><strong>5. Lista:</strong> Obligatorio entregar lista al término del coffee break.</div>
                 </div>
             </div>
 
-            <div class="slide">
-                <div style="width: 100%; max-width: 800px;">
-                    <h2>5.2 Gestión del Coffee Break</h2>
-                    <ul>
-                        <li>El coffee break deberá solicitarse con <strong>mínimo una semana de anticipación</strong>.</li>
-                    </ul>
-                    <div class="warning-box">
-                        <strong>Responsabilidad del Área:</strong> La distribución interna es responsabilidad exclusiva del área solicitante. GDH no es responsable del reparto posterior.
-                    </div>
+            <!-- Gestión -->
+            <div class="content-block">
+                <h2>5.2 Gestión del Coffee Break</h2>
+                <ul>
+                    <li>El coffee break deberá solicitarse con <strong>mínimo una semana de anticipación</strong>.</li>
+                </ul>
+                <div class="warning-box">
+                    <strong>Responsabilidad del Área:</strong> La distribución interna es responsabilidad exclusiva del área solicitante. GDH no es responsable del reparto posterior.
                 </div>
             </div>
 
-            <div class="slide">
+            <!-- Lista de Asistentes -->
+            <div class="content-block">
                 <h2>5.3 Lista de Asistentes</h2>
                 <div class="option-card" style="width:100%; max-width:600px;">
                     <p style="text-align:center;">Es obligatorio que el área solicitante entregue a GDH la lista de asistentes posterior a la capacitación como sustento del servicio brindado.</p>
                 </div>
             </div>
 
-            <div class="slide">
+            <!-- Consideraciones -->
+            <div class="content-block">
                 <h2>6. Consideraciones</h2>
                 <div class="grid-options">
                     <div class="timeline-item">Solo capacitaciones aprobadas por GDH.</div>
@@ -460,64 +452,45 @@
                 </div>
             </div>
 
-            <div class="slide">
+            <!-- Cierre -->
+            <div class="content-block" style="text-align: center; border-bottom: none; padding-bottom: 80px;">
                 <div style="font-size:4rem; color:#28a745; margin-bottom: 15px;"><i class="fa-solid fa-circle-check"></i></div>
                 <h1>¡Gracias por tu atención!</h1>
                 <p>Sigue estos lineamientos para una gestión eficiente.</p>
-                <button class="nav-btn" onclick="goToSlide(0)">Volver al Inicio</button>
-                <!-- Espacio extra para que el botón no quede pegado al fondo en móviles -->
-                <div style="height: 20px;"></div>
+                <button class="nav-btn" onclick="scrollToTop()">Volver al Inicio</button>
             </div>
 
         </div>
     </div>
 
     <script>
-        // Eliminamos la lógica de botones Anterior/Siguiente.
-        // Usamos IntersectionObserver para detectar qué slide está visible.
-
-        const slides = document.querySelectorAll('.slide');
+        // Lógica para la barra de progreso basada en el scroll total de la página
+        const contentWrapper = document.getElementById('content-wrapper');
         const progressBar = document.getElementById('progress-fill');
-        const currentNum = document.getElementById('current-slide-num');
-        const slidesContainer = document.getElementById('slides-wrapper');
 
-        // Opciones del observador: se activa cuando el 50% del slide es visible
-        const observerOptions = {
-            root: slidesContainer,
-            threshold: 0.5 
-        };
+        contentWrapper.addEventListener('scroll', () => {
+            // Altura total del contenido
+            const scrollHeight = contentWrapper.scrollHeight;
+            // Altura visible del contenedor
+            const clientHeight = contentWrapper.clientHeight;
+            // Posición actual del scroll
+            const scrollTop = contentWrapper.scrollTop;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Encontrar el índice del slide visible
-                    const index = Array.from(slides).indexOf(entry.target);
-                    updateUI(index);
-                }
-            });
-        }, observerOptions);
+            // Calcular porcentaje
+            let scrolled = (scrollTop / (scrollHeight - clientHeight)) * 100;
+            
+            // Limitar entre 0 y 100
+            if (scrolled < 0) scrolled = 0;
+            if (scrolled > 100) scrolled = 100;
 
-        // Observar todos los slides
-        slides.forEach(slide => observer.observe(slide));
+            // Actualizar barra
+            progressBar.style.width = `${scrolled}%`;
+        });
 
-        function updateUI(index) {
-            // Asegurar índice válido
-            if (index < 0) index = 0;
-            if (index >= slides.length) index = slides.length - 1;
-
-            // Actualizar barra y números
-            const percentage = ((index + 1) / slides.length) * 100;
-            progressBar.style.width = `${percentage}%`;
-            currentNum.textContent = index + 1;
+        // Función para volver arriba suavemente
+        function scrollToTop() {
+            contentWrapper.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        // Función para ir al inicio desde el último slide (scrollIntoView)
-        function goToSlide(index) {
-            slides[index].scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Inicializar UI
-        updateUI(0);
     </script>
 </body>
 </html>
